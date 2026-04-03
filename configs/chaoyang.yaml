@@ -1,0 +1,47 @@
+dataset:
+  name: chaoyang
+  num_classes: 4
+  root: ${dataset.root}/chaoyang
+
+model:
+  _partial_: True
+  _target_: models.ResNet.ResNet18
+  in_channels: 3
+  conv1_kernel_size: [7, 7]
+  dropout_rate: 0.1
+
+data_augmentation:
+  resize: [256, 256]
+  padding_px: null
+  crop_size: [224, 224]
+  prob_random_flip: 0.5
+  mean: null
+  std: null
+
+training:
+#   lr: 0.01
+  batch_size: 100
+  cntxt_size: 100
+  clipped_norm: null
+#   clipped_norm: null
+
+pretrained:
+  checkpoint: ../experiements/logdir/Classification/396b2afa4c6f44a0a7048924035f3be2
+
+jax:
+  mem: 0.75
+
+human:
+  fatigue_params:
+    p_init_min: 0.8 
+    p_init_max: 0.95
+    p_max_min: 0.9
+    p_max_max: 1.05
+    p_min_min: 0.6
+    p_min_max: 0.75
+    epsilon_peak_min: 0.025
+    epsilon_peak_max: 0.1
+    epsilon_mid_min: 0.25
+    epsilon_mid_max: 0.5
+    p_decay_min: 0.05
+    p_decay_max: 0.11

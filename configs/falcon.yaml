@@ -1,0 +1,85 @@
+defaults:
+  - cifar100
+  # - micebone
+  - override hydra/hydra_logging: disabled  
+  - override hydra/job_logging: disabled
+  - _self_
+  
+hydra:  
+  output_subdir: null  
+  run:  
+    dir: .
+
+experiment:
+  name: FALCON
+  tracking_uri: sqlite:///falcon.db
+  logdir: ./modeldir
+  run_id: null
+  
+actor_critic:
+  fc_dim_size: 512
+  hidden_dim: 512
+  num_features: 512
+
+s5:
+  d_model: 512
+  ssm_size: 1024
+  n_layers: 4
+  blocks: 1
+  activation: full_glu
+  do_norm: True
+  prenorm: True
+  do_gtrxl_norm: True
+
+ppo:
+  clip_eps: 0.2
+  ent_coef: 0.001
+  gamma: 0.99
+  gae_lambda: 0.95
+  scale_clip_eps: False
+  vf_coef: 0.5
+  actor_coef: 1
+  max_grad_norm: 0.5
+  activation: relu
+  lagrangian: True
+  initial_lambda: 0.001
+  lambda_lr: 0.035
+
+
+data_loading:
+  num_workers: 16
+  num_threads: 4
+  prefetch_size: 2
+  progress_bar: True
+
+training:
+  lr: 3e-4
+  anneal_lr: True
+  lr_warmup: 0.01
+  num_envs: 224
+  num_steps: 200
+  update_epochs: 4
+  num_minibatches: 32
+  total_timesteps: 1e7
+  upper_bound: 0.8
+  lower_bound: 0.7
+
+mixup:
+  enable: True
+  beta:
+    a: 0.1
+    b: 0.1
+  
+
+testing:
+  # batch_size: 100
+  num_envs: 50
+  num_steps: 200
+
+ckpt_dir: ../experiements/logdir/FALCON/checkpoints
+
+jax:
+  platform: cuda
+  mem: 1.0
+  disable_jit: False
+  dtype: jnp.bfloat16

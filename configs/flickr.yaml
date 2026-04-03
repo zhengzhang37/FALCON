@@ -1,0 +1,46 @@
+dataset:
+  name: flickr
+  num_classes: 8
+  root:   ${dataset.root}/flickr
+
+model:
+  _partial_: True
+  _target_: models.ResNet.ResNet18
+  in_channels: 3
+  conv1_kernel_size: [7, 7]
+  dropout_rate: 0.1
+
+data_augmentation:
+  resize: [256, 256]
+  padding_px: null
+  crop_size: [224, 224]
+  prob_random_flip: 0.5
+  mean: null
+  std: null
+
+training:
+  batch_size: 100
+  cntxt_size: 100
+  clipped_norm: null
+
+pretrained:
+  checkpoint: ../experiements/logdir/Classification/cb3048260f6f42408b8a0140b6e21cbe
+
+jax:
+  mem: 0.75
+
+human:
+  fatigue_params:
+    p_init_min: 0.65 
+    p_init_max: 0.95
+    p_max_min: 0.8
+    p_max_max: 1.05
+    p_min_min: 0.3
+    p_min_max: 0.45
+    epsilon_peak_min: 0.025
+    epsilon_peak_max: 0.1
+    epsilon_mid_min: 0.25
+    epsilon_mid_max: 0.5
+    p_decay_min: 0.05
+    p_decay_max: 0.11
+  

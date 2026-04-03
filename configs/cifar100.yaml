@@ -1,0 +1,135 @@
+dataset:
+  name: cifar100
+  num_classes: 100
+  root: ${dataset.root}/cifar100/ciFAIR-100
+
+model:
+  _partial_: True
+  # _target_: models.ResNet.PreActResNet18
+  _target_: models.PreActResNet.ResNet18
+  # in_channels: 3  # color images: 3, black and white: 1
+  # conv1_kernel_size: [3, 3]
+
+# data_augmentation:
+#   resize: null
+#   padding_px: 4
+#   crop_size: [32, 32]
+#   prob_random_flip: 0.5
+#   mean: null
+#   std: null
+
+pretrained:
+  checkpoint: ../experiements/logdir/Classification/934c96430d7b4f60aca940bb57663513
+
+data_augmentation:
+  padding_px: null
+  resize: [36, 36]
+  crop_size: [32, 32]
+  prob_random_flip: 0.5
+  mean: null
+  std: null
+
+human:
+  fatigue_params:
+    p_init_min: 0.7 
+    p_init_max: 0.95
+    p_max_min: 0.8
+    p_max_max: 1.05
+    p_min_min: 0.4
+    p_min_max: 0.55
+    epsilon_peak_min: 0.025
+    epsilon_peak_max: 0.1
+    epsilon_mid_min: 0.25
+    epsilon_mid_max: 0.5
+    p_decay_min: 0.05
+    p_decay_max: 0.11
+
+  fatigue_params1:
+    p_init_min: 0.85 
+    p_init_max: 1.00
+    p_max_min: 0.90
+    p_max_max: 1.05
+    p_min_min: 0.8
+    p_min_max: 0.95
+    epsilon_peak_min: 0.008
+    epsilon_peak_max: 0.1
+    epsilon_mid_min: 0.35
+    epsilon_mid_max: 0.5
+    p_decay_min: 0.07
+    p_decay_max: 0.10
+
+  test_fatigue_params1:
+    p_init_min: 0.85 
+    p_init_max: 1.00
+    p_max_min: 0.90
+    p_max_max: 1.05
+    p_min_min: 0.8
+    p_min_max: 0.95
+    epsilon_peak_min: 0.008
+    epsilon_peak_max: 0.1
+    epsilon_mid_min: 0.35
+    epsilon_mid_max: 0.5
+    p_decay_min: 0.07
+    p_decay_max: 0.10
+
+  fatigue_params2:
+    p_init_min: 0.75
+    p_init_max: 0.85
+    p_max_min: 0.85
+    p_max_max: 0.95
+    p_min_min: 0.55
+    p_min_max: 0.65
+    epsilon_peak_min: 0.05
+    epsilon_peak_max: 0.08
+    epsilon_mid_min: 0.35
+    epsilon_mid_max: 0.5
+    p_decay_min: 0.05
+    p_decay_max: 0.08
+
+  fatigue_params3:
+    p_init_min: 0.7
+    p_init_max: 0.8
+    p_max_min: 0.85
+    p_max_max: 0.95
+    p_min_min: 0.4
+    p_min_max: 0.55
+    epsilon_peak_min: 0.025
+    epsilon_peak_max: 0.04
+    epsilon_mid_min: 0.25
+    epsilon_mid_max: 0.35
+    p_decay_min: 0.09
+    p_decay_max: 0.11
+
+  test_fatigue_params2:
+    p_init_min: 0.75
+    p_init_max: 0.85
+    p_max_min: 0.85
+    p_max_max: 0.95
+    p_min_min: 0.55
+    p_min_max: 0.65
+    epsilon_peak_min: 0.05
+    epsilon_peak_max: 0.08
+    epsilon_mid_min: 0.35
+    epsilon_mid_max: 0.5
+    p_decay_min: 0.05
+    p_decay_max: 0.08
+
+  test_fatigue_params3:
+    p_init_min: 0.7
+    p_init_max: 0.8
+    p_max_min: 0.85
+    p_max_max: 0.95
+    p_min_min: 0.4
+    p_min_max: 0.55
+    epsilon_peak_min: 0.025
+    epsilon_peak_max: 0.04
+    epsilon_mid_min: 0.25
+    epsilon_mid_max: 0.35
+    p_decay_min: 0.09
+    p_decay_max: 0.11
+
+training:
+  lr: 0.01
+  batch_size: 200
+  cntxt_size: 200
+  clipped_norm: 10

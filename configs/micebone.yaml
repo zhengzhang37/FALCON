@@ -1,0 +1,49 @@
+dataset:
+  name: micebone
+  num_classes: 3
+  root: /data1/zheng/data/MiceBone
+  train_file: ${dataset.root}/annotations/train.json
+  test_file: ${dataset.root}/annotations/test.json
+
+model:
+  _partial_: True
+  _target_: models.ResNet.ResNet18
+  in_channels: 3
+  conv1_kernel_size: [7, 7]
+  dropout_rate: 0.1
+
+data_augmentation:
+  resize: [256, 256]
+  padding_px: null
+  crop_size: [224, 224]
+  prob_random_flip: 0.5
+  mean: null
+  std: null
+
+training:
+  # lr: 0.01
+  batch_size: 100
+  cntxt_size: 100
+  # num_epochs: 300
+  clipped_norm: null
+
+pretrained:
+  checkpoint: /data1/zheng/work/DynamicL2D/experiements/logdir/Classification/7ce114c5f60e40c7ad1f554fb4eb376b
+
+jax:
+  mem: 0.75
+
+human:
+  fatigue_params:
+    p_init_min: 0.8 
+    p_init_max: 0.95
+    p_max_min: 0.9
+    p_max_max: 1.05
+    p_min_min: 0.6
+    p_min_max: 0.75
+    epsilon_peak_min: 0.025
+    epsilon_peak_max: 0.1
+    epsilon_mid_min: 0.25
+    epsilon_mid_max: 0.5
+    p_decay_min: 0.05
+    p_decay_max: 0.11
