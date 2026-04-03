@@ -49,6 +49,7 @@ Please make changes in the `configs/falcon.yaml` and `configs/<dataset_name>.yam
 bash experiments/run.sh
 ```
 
+Other human fatigue simulators can be replaced in `models/human_simulation_rl.py`.
 
 ## Citation
 
